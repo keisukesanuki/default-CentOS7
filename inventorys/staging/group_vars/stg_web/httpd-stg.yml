@@ -1,0 +1,5 @@
+---
+   ServerAdmin: info@beyondjapan.com
+   domain_name:
+      - { domain: 'stg-test1.com' ,customer: 'testuser1' }
+      - { domain: 'stg-test2.com' ,customer: 'testuser1' }

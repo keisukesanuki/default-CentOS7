@@ -1,0 +1,53 @@
+---
+# apacheインストール
+- name: apache-install
+  yum:
+    name:
+      - httpd
+      - mod_ssl
+    state: present
+
+#################################################################
+#- name: public_html_mkdir_idcf
+#  file:
+#    path="/mnt/HDD/vhosts/{{ item.domain }}/public_html"
+#    state=directory
+#    owner="{{ item.customer }}"
+#    group="{{ item.customer }}"
+#    recurse=yes
+#  with_items:
+#    -  "{{ domain_name }}"  
+#
+#- name: symlink_idcf
+#  file:
+#    src="/mnt/HDD/vhosts"
+#    dest="/var/www/vhosts"
+#    state=link
+#################################################################
+
+- name: mod_defconf
+  blockinfile:
+    dest: /etc/httpd/conf/httpd.conf
+    insertafter: '^#ServerName www.example.com:80$'
+    content: 'ServerName {{ inventory_hostname }}:80'
+
+- name: public_html_mkdir
+  file:
+    path: "/var/www/vhosts/{{ item.domain }}/public_html"
+    state: directory
+    owner: "{{ item.customer }}"
+    group: "{{ item.customer }}"
+    recurse: yes
+  with_items:
+    -  "{{ domain_name }}"
+
+
+- name: virtualhost_add
+  template:
+    src: "../template/vhost.j2"
+    dest: "/etc/httpd/conf.d/vhost.{{ item.domain }}.conf"
+    owner: root
+    group: root
+    mode: 644
+  with_items:
+    -  "{{ domain_name }}"

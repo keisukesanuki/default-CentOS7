@@ -1,0 +1,11 @@
+---
+# tasks file for mysql-client
+- name: repo_add
+  yum:
+    name: http://dev.mysql.com/get/mysql57-community-release-el7-11.noarch.rpm
+    state: present
+
+- name: mysql-install
+  yum:
+    name: mysql-community-client
+    state: present

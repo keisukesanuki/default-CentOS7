@@ -1,0 +1,40 @@
+#!/bin/bash
+
+#初期パスワードを取得
+#int_passwd=$(grep "password" /var/log/mysqld.log | awk '{ print $11}')
+int_passwd=$(grep "A temporary password is generated for root@localhost:" /var/log/mysqld.log | awk '{ print $11}')
+#変更後のDBパスワードを設定
+db_pass=aes7sChea7v:12
+
+SECURE_MYSQL=$(expect -c "
+set timeout 10
+spawn mysql_secure_installation
+
+expect \"Enter password for user root:\"
+send \"${int_passwd}\r\"
+
+expect \"New password:\"
+send \"${db_pass}\r\"
+
+expect \"Re-enter new password:\"
+send \"${db_pass}\r\"
+
+expect \"Change the password for root ?\"
+send \"n\r\"
+
+expect \"Remove anonymous users?\"
+send \"y\r\"
+
+expect \"Disallow root login remotely?\"
+send \"y\r\"
+
+expect \"Remove test database and access to it?\"
+send \"y\r\"
+
+expect \"Reload privilege tables now?\"
+send \"y\r\"
+
+expect eof
+")
+
+echo "$SECURE_MYSQL"

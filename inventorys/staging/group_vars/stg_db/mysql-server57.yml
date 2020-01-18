@@ -1,0 +1,4 @@
+---
+# vars file for db_backup
+innodb_buffer_pool_size: 256M
+key_buffer_size: 128M

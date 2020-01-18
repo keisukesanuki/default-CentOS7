@@ -1,0 +1,38 @@
+---
+# php-modelsインストール
+# リポジトリ追加
+- name: epelremi-install
+  yum:
+    name:
+      - https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+      - http://rpms.famillecollet.com/enterprise/remi-release-{{ rh_version }}.rpm
+
+- name: php-module_install
+  yum:
+    name="{{ item }}"
+    enablerepo="remi-php{{ php_var }}"
+    state=present
+  with_items:
+    - "{{ php_modules }}"
+
+# php.ini変更
+- name: php.ini_change
+  lineinfile:
+    dest="/etc/php.ini"
+    regexp="{{ item.regexp }}"
+    line="{{ item.line }}"
+  with_items:
+    - { regexp: ";date.timezone*" ,line: "date.timezone = Asia/Tokyo" }
+    - { regexp: "expose_php = On" ,line: "expose_php = Off" }
+    - { regexp: "post_max_size = 8M" ,line: "post_max_size = 128M" }
+    - { regexp: "upload_max_filesize = 2M" ,line: "upload_max_filesize = 128M" }
+
+#- name: put_php.ini
+#  template:
+#    src: ../templates/php.ini
+#    dest: /etc/php.ini
+#    owner: root
+#    group: root
+#    mode: 0644
+#    backup: yes 
+

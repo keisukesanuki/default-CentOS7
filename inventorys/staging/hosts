@@ -1,0 +1,9 @@
+[all]
+test-stg-web01 ansible_host=192.168.33.44
+test-stg-dbm01 ansible_host=192.168.33.66
+
+[stg_web]
+test-stg-web01 ansible_host=192.168.33.44
+
+[stg_db]
+test-stg-dbm01 ansible_host=192.168.33.66

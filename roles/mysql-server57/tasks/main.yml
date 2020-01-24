@@ -19,10 +19,12 @@
     owner: root
     group: root
     backup: yes
-  notify: mysqld_start
 
 - name: mysql_restart
-  shell: systemctl restart mysqld
+  systemd:
+    name: mysqld
+    state: started
+    enabled: yes
 
 - name: exec_mysql_secure_installation
   script: ../files/mysql_secure_installation

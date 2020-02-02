@@ -11,6 +11,7 @@
       - mysql-server
       - expect
     state: present
+  register: result
 
 - name: put_conf
   template:
@@ -28,3 +29,4 @@
 
 - name: exec_mysql_secure_installation
   script: ../files/mysql_secure_installation
+  when: result|changed

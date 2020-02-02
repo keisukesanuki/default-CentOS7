@@ -3,8 +3,8 @@
 #####################################
 - name: apply configuration to all nodes
   hosts: all
-#  remote_user: vagrant
-  remote_user: root
+  remote_user: vagrant
+#  remote_user: root
   become: yes
   roles:
     - common
@@ -16,8 +16,8 @@
 #####################################
 - name: apply stg_web configuration to stg_web nodes
   hosts: stg_web
-#  remote_user: vagrant
-  remote_user: root
+  remote_user: vagrant
+#  remote_user: root
   become: yes
   roles:
     - httpd

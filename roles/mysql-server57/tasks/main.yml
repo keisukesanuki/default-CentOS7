@@ -27,6 +27,16 @@
     state: started
     enabled: yes
 
+- name: confirm check_file
+  stat: path=/usr/local/etc/mysql_stat.txt
+  register: result_mysql_exit
+
 - name: exec_mysql_secure_installation
   script: ../files/mysql_secure_installation
-  when: result|changed
+  when: not result_mysql_exit.stat.exists
+
+- name: create check_file
+  file:
+    path: /usr/local/etc/mysql_stat.txt
+    state: touch
+    mode: "u=rw,g=r,o=r"

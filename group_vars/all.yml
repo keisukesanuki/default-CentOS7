@@ -1,0 +1,30 @@
+---
+# define root password
+root_pass: Qr9HhKVL:gf
+rh_version: 7
+
+# define add linux user
+ex_user:
+  - { customer: 'testuser1' ,customer_pass: 'Kc=datum' }
+  - { customer: 'testuser2' ,customer_pass: 'uX7HyhiR' }
+
+# define apache administrator
+ServerAdmin: info@test.com
+# define apache virtualhost
+domain_name:
+  - { domain: 'test1.com' ,customer: 'testuser1' }
+  - { domain: 'test2.com' ,customer: 'testuser2' }
+
+# define php
+php_var: 72
+php_modules:
+  - "php"
+  - "php-pdo"
+  - "php-mbstring"
+  - "php-gd"
+  - "php-mysqlnd"
+
+# define my.cnf
+innodb_buffer_pool_size: 256M
+key_buffer_size: 128M
+db_passwd: aes7sChea7v:12

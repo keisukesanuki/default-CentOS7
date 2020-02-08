@@ -1,0 +1,18 @@
+#####################################
+##          全サーバ共通           ##
+#####################################
+- name: apply configuration to all nodes
+  hosts: all
+  remote_user: vagrant
+#  remote_user: root
+  become: yes
+  roles:
+    - common
+    - tools
+    - useradd
+    - vsftpd
+    - httpd
+    - php
+    - mysql-server57
+    - db_backup
+    - tools

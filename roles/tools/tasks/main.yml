@@ -19,3 +19,4 @@
     - "mymysql.sh"
     - "viewconf.sh"
     - "swap_ListUp.sh"
+    - "cert_check.sh"

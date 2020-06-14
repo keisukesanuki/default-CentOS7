@@ -1,18 +1,18 @@
 httpd
 =========
 
+## これは何？
+
+apacheの基本的な設定を行うplaybookです。
+
 - apacheインストール
 - SeverName設定
 - ドキュメントルート作成
 - バーチャルホスト設定
 
-Requirements
-------------
+## 変数
 
-- CentOS7
-
-Role Variables
---------------
+domain_nameに設定するドメインとOSユーザを指定して下さい。
 
 ```
 ---
@@ -21,16 +21,6 @@ Role Variables
       - { domain: 'test1.com' ,customer: 'testuser1' }
       - { domain: 'test2.com' ,customer: 'testuser2' }
 ```
-
-Dependencies
-------------
-
-- none
-
-Example Playbook
-----------------
-
-- none
 
 License
 -------

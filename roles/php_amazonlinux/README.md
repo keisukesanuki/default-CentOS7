@@ -1,18 +1,20 @@
 php
 =========
 
+## これは何？
+
+phpとphpモジュールをインストールするplaybookです。  
+Amazonlinux2用です。
+
 - レポジトリの追加
 - PHPインストール
 - 各種モジュールインストール
 - php.ini設定
 
-Requirements
-------------
+## 変数
 
-- Amazon Linux(2)
-
-Role Variables
---------------
+php_varに導入するphpのバージョンを定義して下さい。  
+php_modulesに導入するモジュールを定義して下さい。
 
 ```
 ---
@@ -30,16 +32,6 @@ Role Variables
     - "php-mysqlnd"
 ```
 
-Dependencies
-------------
-
-- none
-
-Example Playbook
-----------------
-
-- none
-
 License
 -------
 
@@ -48,5 +40,4 @@ BSD
 Author Information
 ------------------
 
-- junichirou okazaki
 - keisuke sanuki 

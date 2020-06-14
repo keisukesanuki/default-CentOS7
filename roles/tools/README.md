@@ -1,27 +1,12 @@
 tools
 =========
 
+## これは何？
+
+運用で使用するtoolをデプロイするplaybookです。
+
 - TOOLSディレクトリ作成
 - 各種ツール配置
-
-Requirements
-------------
-
-- none
-
-Role Variables
---------------
-
-- none
-
-Dependencies
-------------
-
-- none
-
-Example Playbook
-----------------
-- none
 
 License
 -------

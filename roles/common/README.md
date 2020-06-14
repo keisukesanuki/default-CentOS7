@@ -1,38 +1,25 @@
-common
+db_backup
 =========
 
-- 開発パッケージインストール
-- 各種パッケージアップデート
-- epelインストール
-- selinuxライブラリインストール
-- selinux無効化
-- firewalld無効化
-- 運用パッケージインストール
-- ホストネーム設定
-- カーネルパラメータ設定
-- limit.conf設定
-- timezone設定
-- history設定
+## これは何？
 
-Requirements
-------------
+MySQLバックアップスクリプト設置用のplaybookです
 
-- CentOS7
+- TOOLSディレクトリ作成
+- バックアップディレクトリ作成
+- バックアップスクリプト設置
+- CRON登録
 
-Role Variables
---------------
 
-- none
+## 変数
 
-Dependencies
-------------
+MySQLのrootパスワードを定義して下さい。
 
-- none
-
-Example Playbook
-----------------
-
-- none
+```
+---
+# vars file for db_backup
+db_passwd: aes7sChea7v:12
+```
 
 License
 -------

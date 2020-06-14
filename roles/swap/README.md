@@ -1,27 +1,12 @@
 SWAP
 =========
 
-2GBのSWAP領域を作成
+## これは何？
 
-Requirements
-------------
+2GBのSWAP領域を作成するplaybookです。
 
-- CentOS7
-
-Role Variables
---------------
-
-- none
-
-Dependencies
-------------
-
-- none
-
-Example Playbook
-----------------
-
-- none
+- SWAP領域を作成
+- fstabに追記
 
 License
 -------

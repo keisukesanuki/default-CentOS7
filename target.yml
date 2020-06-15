@@ -2,7 +2,7 @@
 ##          全サーバ共通           ##
 #####################################
 - name: apply configuration to all nodes
-  hosts: all
+  hosts: target
   remote_user: vagrant
 #  remote_user: root
   become: yes

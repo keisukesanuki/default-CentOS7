@@ -25,7 +25,7 @@ zabbix_password: gstshsW3mrzy4M:sgtsh
 /etc/my.cnfに下記を追記して下さい。
 
 ```
-character_set_server=utf8mb4
+character_set_server=utf8
 ```
 
 License

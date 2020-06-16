@@ -14,7 +14,7 @@
       - zabbix-get
       - MySQL-python
       - vlgothic-p-fonts
-enablerepo: zabbix
+    enablerepo: zabbix
     state: present
 
 
@@ -92,4 +92,3 @@ enablerepo: zabbix
 
 #サービスの起動
   notify: zabbix-server_start
-  notify: httpd-server_restart

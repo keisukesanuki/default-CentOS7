@@ -20,6 +20,14 @@ root_password: W3mrzy4M:sgt
 zabbix_password: gstshsW3mrzy4M:sgtsh
 ```
 
+## 補足
+
+/etc/my.cnfに下記を追記して下さい。
+
+```
+character_set_server=utf8mb4
+```
+
 License
 -------
 

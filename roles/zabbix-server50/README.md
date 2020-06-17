@@ -26,6 +26,7 @@ zabbix_password: gstshsW3mrzy4M:sgtsh
 
 ```
 character_set_server=utf8
+collation-server=utf8_bin
 ```
 
 License

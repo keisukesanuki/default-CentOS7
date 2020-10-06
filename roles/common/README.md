@@ -1,25 +1,24 @@
-db_backup
+common
 =========
 
 ## これは何？
 
-MySQLバックアップスクリプト設置用のplaybookです
+基本的なOS設定用のplaybookです。
 
-- TOOLSディレクトリ作成
-- バックアップディレクトリ作成
-- バックアップスクリプト設置
-- CRON登録
+- 開発パッケージインストール
+- 各種パッケージアップデート
+- epelリポジトリインストール
+- selinuxライブラリインストール
+- selinux無効化
+- firewalld無効化
+- 運用パッケージインストール
+- ホストネーム設定
+- カーネルパラメータ設定
+- limit.conf設定
+- timezone設定
+- history設定
+- /etc/hostsにホストネームを追加
 
-
-## 変数
-
-MySQLのrootパスワードを定義して下さい。
-
-```
----
-# vars file for db_backup
-db_passwd: aes7sChea7v:12
-```
 
 License
 -------
@@ -29,4 +28,4 @@ BSD
 Author Information
 ------------------
 
-- keisuke sanuki 
+- keisuke sanuki

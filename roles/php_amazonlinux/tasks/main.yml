@@ -20,6 +20,7 @@
 - name: php-module_install
   yum:
     name="{{ item }}"
+    disablerepo=amzn2*
     enablerepo="remi-php{{ php_var }}"
     state=present
   with_items:

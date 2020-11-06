@@ -16,14 +16,6 @@ inventorysファイルです。
 ### target.yml
 mainのplaybookです。
 
-### inventorys以下
-各種環境を分けてansibleを実行したい場合に利用します。  
-＊基本的に利用しなくて大丈夫です。
-
-### site.yml
-各種環境を分けてansibleを実行したい場合に利用します。  
-＊基本的に利用しなくて大丈夫です。
-
 ### key
 OSユーザの秘密鍵を設置します。
 

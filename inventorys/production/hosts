@@ -1,9 +1,0 @@
-[all]
-test-prd-web01 ansible_host=192.168.33.55
-test-prd-dbm01 ansible_host=192.168.33.77
-
-[prd_web]
-test-prd-web01 ansible_host=192.168.33.55
-
-[prd_db]
-test-prd-dbm01 ansible_host=192.168.33.77

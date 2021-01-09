@@ -42,7 +42,6 @@ vi target.yml
 ```
   roles:
     - common
-    - byd_ops
     - useradd
     - httpd
     - byd_httpd

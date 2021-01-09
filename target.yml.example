@@ -7,11 +7,12 @@
   become: yes
   roles:
     - common
-    - tools
     - useradd
     - vsftpd
-    - httpd
-    - php
+    #- httpd
+    #- php
+    - nginx
+    - php-fpm
     - mysql-server57
     - db_backup
     - tools

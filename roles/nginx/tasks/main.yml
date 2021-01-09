@@ -1,0 +1,70 @@
+---
+# tasks file for nginx
+- name: install nginx
+  yum:
+    name:
+      - nginx
+    lock_timeout: 180
+
+- name: public_html_mkdir
+  file:
+    path: "/var/www/vhosts/{{ item.domain }}/public_html"
+    state: directory
+    owner: "{{ item.customer }}"
+    group: "{{ item.customer }}"
+    recurse: yes
+  with_items:
+    -  "{{ domain_name }}"
+
+- name: virtualhost_add
+  template:
+    src: "../templates/vhost.j2"
+    dest: "/etc/nginx/conf.d/vhost.{{ item.domain }}.conf"
+    owner: root
+    group: root
+    mode: 0644
+  with_items:
+    -  "{{ domain_name }}"
+
+- name: put conf
+  template:
+    src: "../templates/{{ item }}"
+    dest: /etc/nginx/conf.d/
+    owner: root
+    group: root
+    mode: 0644
+  with_items:
+    - worker_rlimit_nofile.conf
+    #- alb_backend.conf 
+
+- name: nginx_worker_connections_change
+  lineinfile:
+    dest: "/etc/nginx/nginx.conf"
+    state: present
+    regexp: "{{ item.regexp }}"
+    line: "{{ item.line }}"
+    backup: yes
+  with_items:
+    - { regexp: "worker_connections 1024;" ,line: "worker_connections 4096;" }
+
+- name: nginx_worker_rlimit_nofile_change
+  lineinfile:
+    dest: "/etc/nginx/nginx.conf"
+    state: present
+    insertafter: "^worker_processes auto;"
+    line: "worker_rlimit_nofile 4096;"
+
+- name: nginx_limit_change
+  template:
+    src: "../templates/limits.conf"
+    dest: "/etc/systemd/system/nginx.service.d/"
+    owner: root
+    group: root
+    mode: 644  
+
+- name: start nginx
+  systemd:
+    name: nginx
+    state: started
+    enabled: yes 
+

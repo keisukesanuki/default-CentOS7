@@ -34,7 +34,7 @@
     group: root
     mode: 0644
   with_items:
-    - worker_rlimit_nofile.conf
+    - upstream.conf
     #- alb_backend.conf 
 
 - name: nginx_worker_connections_change

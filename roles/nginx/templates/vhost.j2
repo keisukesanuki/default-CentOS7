@@ -1,8 +1,3 @@
-upstream php-fpm-socket {
-  ip_hash;
-  server unix:/var/run/php-fpm-web.sock;
-}
-
 server {
     listen 80;
     server_name  {{ item.domain }};

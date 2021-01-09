@@ -42,13 +42,14 @@ vi target.yml
 ```
   roles:
     - common
-    - byd_ops
+    - tools
     - useradd
-    - httpd
-    - byd_httpd
-    - php
+    - vsftpd
+    - nginx
+    - php-fpm
     - mysql-server57
     - db_backup
+    - tools
 ```
 
 ### 要件に併せて変数を定義

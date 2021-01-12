@@ -5,6 +5,11 @@
     name: https://dev.mysql.com/get/mysql80-community-release-el7-3.noarch.rpm
     state: present
 
+- name: check my.cnf
+  stat:
+    path: /etc/my.cnf
+  register: my_check
+
 - name: mysql-install
   yum:
     name:
@@ -21,12 +26,15 @@
     group: root
     mode: 0644
     backup: yes
+  when: not my_check.stat.exists
 
 - name: restart_mysql
   systemd:
     name: mysqld
-    state: started
+    state: restarted
     enabled: yes
+  when: not my_check.stat.exists
 
 - name: exec_mysql_secure_installation
   script: ../files/mysql_secure_installation
+  when: not my_check.stat.exists

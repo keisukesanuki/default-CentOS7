@@ -39,8 +39,14 @@
     backup: yes 
 
 # デフォルトファイルのコメントアウト
+- name: check original www.conf
+  stat:
+    path: /etc/php-fpm.d/www.conf
+  register: www_check
+
 - name: change www.conf
   shell: mv /etc/php-fpm.d/www.conf /etc/php-fpm.d/www.conf.org
+  when: www_check.stat.exists
 
 # php-fpmの起動
 - name: start php-fpm

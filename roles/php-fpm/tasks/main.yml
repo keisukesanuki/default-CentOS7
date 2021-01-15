@@ -48,6 +48,18 @@
   shell: mv /etc/php-fpm.d/www.conf /etc/php-fpm.d/www.conf.org
   when: www_check.stat.exists
 
+# ディレクトリの権限を調整
+- name: change permission
+  file:
+    path: /var/lib/php/{{ item }}
+    owner: root
+    group: nginx
+    mode: 0770
+  with_items:
+    - opcache
+    - session
+    - wsdlcache
+
 # php-fpmの起動
 - name: start php-fpm
   systemd:

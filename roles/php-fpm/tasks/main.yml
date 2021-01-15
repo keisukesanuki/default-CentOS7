@@ -49,7 +49,7 @@
   when: www_check.stat.exists
 
 # ディレクトリの権限を調整
-- name: chenge permission
+- name: change permission
   file:
     path: /var/lib/php/{{ item }}
     owner: root

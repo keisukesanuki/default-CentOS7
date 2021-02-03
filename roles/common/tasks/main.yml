@@ -107,3 +107,4 @@
      line="HISTTIMEFORMAT='%Y-%m-%dT%T%z '"
 
 - include: host_change.yml
+- include: etckeeper_commit.yml

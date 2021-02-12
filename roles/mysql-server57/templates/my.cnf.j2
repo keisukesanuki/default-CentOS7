@@ -31,15 +31,20 @@ max_allowed_packet = 8M
 log-error = /var/log/mysqld.log
 pid-file = /var/run/mysqld/mysqld.pid
 
-# innodb_buffer_pool_sizeを定義
+# innodb
 innodb_buffer_pool_size = {{ innodb_buffer_pool_size }}
 
-# key_buffer_sizeを定義
+# 物理メモリの1/16くらい？
+#innodb_log_file_size = 512M
+# たぶん2以上にあげてもメリットない
+#innodb_log_files_in_group = 2
+# MySQL専有サーバなら O_DIRECT がいいかも
+#innodb_flush_method = O_DIRECT
+
+# isam
 key_buffer_size = {{ key_buffer_size }}
 
 # slow-logの設定
-log-error = /var/log/mysqld.log
 slow_query_log = 1
 slow_query_log_file = /var/run/mysqld/slow.log
 long_query_time = 1
-#min_examined_row_limit=10000

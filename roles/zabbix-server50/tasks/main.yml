@@ -31,6 +31,28 @@
     enablerepo: zabbix-frontend
     state: present
 
+# zabbix用にmysqlを調整
+#- name: put my.cnf
+#  template:
+#    src: ../templates/my.cnf.j2
+#    dest: /etc/my.cnf
+#    owner: root
+#    group: root
+#    mode: 0644
+#    backup: yes
+
+- name: change my.cnf
+  blockinfile:
+    dest: /etc/my.cnf
+    block: |
+       character_set_server = utf8
+       collation-server = utf8_bin
+
+- name: restart mysqld
+  systemd:
+    name: mysqld
+    state: restarted
+
 
 # zabbixユーザ作成
 - name: create db for zabbix

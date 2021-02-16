@@ -8,7 +8,7 @@ Int_Passwd=$(grep "A temporary password is generated for root@localhost:" /var/l
 #MysqlRootPasswd="$(mkpasswd -l 16 | tee -a ~/.mysql.secrets)"
 
 # パスワード指定
-MysqlRootPasswd=aes7sChea7v:12
+MysqlRootPasswd=W3mrzy4M:sgt
 
 expect -c '
     set timeout 10;

@@ -33,15 +33,28 @@
     state: restarted
     enabled: yes
 
-- name: exec_mysql_secure_installation
-  script: ../files/mysql_secure_installation
-  when: not my_check.stat.exists
+#- name: exec_mysql_secure_installation
+#  script: ../files/mysql_secure_installation
+#  when: not my_check.stat.exists
 
-- name: create check file
-  file:
-    path: /etc/my.ansible_check
-    state: touch
+- name: confirm check_file
+  stat: path=/usr/local/etc/mysql_stat.txt
+  register: result_mysql_exit
+
+- name: put mysql_secure_installation_script
+  template:
+    src: ../templates/mysql_secure_installation_script
+    dest: /tmp/mysql_secure_installation_script
     owner: root
     group: root
-    mode: 0644
+    mode: 0755
 
+- name: exec mysql_secure_installation_script
+  shell: "/tmp/mysql_secure_installation_script"
+  when: not result_mysql_exit.stat.exists
+
+- name: create check_file
+  file:
+    path: /usr/local/etc/mysql_stat.txt
+    state: touch
+    mode: "u=rw,g=r,o=r"

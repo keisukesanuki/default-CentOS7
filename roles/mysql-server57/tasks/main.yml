@@ -31,8 +31,20 @@
   stat: path=/usr/local/etc/mysql_stat.txt
   register: result_mysql_exit
 
-- name: exec_mysql_secure_installation
-  script: ../files/mysql_secure_installation
+#- name: exec_mysql_secure_installation
+#  script: ../files/mysql_secure_installation
+#  when: not result_mysql_exit.stat.exists
+
+- name: put mysql_secure_installation_script
+  template:
+    src: ../templates/mysql_secure_installation_script
+    dest: /tmp/mysql_secure_installation_script
+    owner: root
+    group: root
+    mode: 0755
+
+- name: exec mysql_secure_installation_script
+  shell: "/tmp/mysql_secure_installation_script"
   when: not result_mysql_exit.stat.exists
 
 - name: create check_file

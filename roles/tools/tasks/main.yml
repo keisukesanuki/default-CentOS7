@@ -9,7 +9,7 @@
     mode: 0755
 
 - name: put_mymysql.sh
-  copy:
+  template:
     src: "../files/{{ item }}"
     dest: /usr/local/TOOLS/bin/
     owner: root

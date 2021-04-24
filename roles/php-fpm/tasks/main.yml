@@ -1,14 +1,14 @@
 ---
 # php-modelsインストール
 # リポジトリ追加
-- name: epelremi-install
+- name: install epel and remi repository
   yum:
     name:
       - https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
       - http://rpms.famillecollet.com/enterprise/remi-release-7.rpm
 
 # phpのインストール
-- name: php-module_install
+- name: install php-module
   yum:
     name="{{ item }}"
     enablerepo="remi-php{{ php_var | default('74', true) }}"
@@ -17,7 +17,7 @@
     - "{{ php_modules | default('php-fpm', true) }}"
 
 # php.ini変更
-- name: php.ini_change
+- name: change php.ini
   lineinfile:
     dest="/etc/php.ini"
     regexp="{{ item.regexp }}"
@@ -29,7 +29,7 @@
     - { regexp: "upload_max_filesize = 2M" ,line: "upload_max_filesize = 128M" }
 
 # php-fpmファイルの設置
-- name: put_php.ini
+- name: put php.ini
   template:
     src: ../templates/web.conf
     dest: /etc/php-fpm.d/web.conf

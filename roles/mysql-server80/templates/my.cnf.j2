@@ -37,7 +37,7 @@ log-error = /var/log/mysqld.log
 pid-file = /var/run/mysqld/mysqld.pid
 
 # innodb
-innodb_buffer_pool_size = {{ innodb_buffer_pool_size }}
+innodb_buffer_pool_size = {{ innodb_buffer_pool_size | default('256M', true) }}
 
 # 物理メモリの1/16くらい？
 #innodb_log_file_size = 512M
@@ -47,7 +47,7 @@ innodb_buffer_pool_size = {{ innodb_buffer_pool_size }}
 #innodb_flush_method = O_DIRECT
 
 # isam
-key_buffer_size = {{ key_buffer_size }}
+key_buffer_size = {{ key_buffer_size | default('8M', true) }}
 
 # 不具合あり
 #innodb_dedicated_server = On

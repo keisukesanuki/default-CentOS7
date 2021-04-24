@@ -6,7 +6,7 @@
       - nginx
     lock_timeout: 180
 
-- name: public_html_mkdir
+- name: mkdir public_html
   file:
     path: "/var/www/vhosts/{{ item.domain }}/public_html"
     state: directory
@@ -16,7 +16,7 @@
   with_items:
     -  "{{ domain_name }}"
 
-- name: virtualhost_add
+- name: put virtualhost
   template:
     src: "../templates/vhost.j2"
     dest: "/etc/nginx/conf.d/vhost.{{ item.domain }}.conf"
@@ -26,7 +26,7 @@
   with_items:
     -  "{{ domain_name }}"
 
-- name: put conf
+- name: put upstream.conf
   template:
     src: "../templates/{{ item }}"
     dest: /etc/nginx/conf.d/
@@ -37,7 +37,7 @@
     - upstream.conf
     #- alb_backend.conf 
 
-- name: nginx_worker_connections_change
+- name: change worker_connections
   lineinfile:
     dest: "/etc/nginx/nginx.conf"
     state: present
@@ -47,14 +47,14 @@
   with_items:
     - { regexp: "worker_connections 1024;" ,line: "worker_connections 4096;" }
 
-- name: nginx_worker_rlimit_nofile_change
+- name: change worker_rlimit_nofile
   lineinfile:
     dest: "/etc/nginx/nginx.conf"
     state: present
     insertafter: "^worker_processes auto;"
     line: "worker_rlimit_nofile 4096;"
 
-- name: nginx_limit_change
+- name: change nginx_limit
   template:
     src: "../templates/limits.conf"
     dest: "/etc/systemd/system/nginx.service.d/"

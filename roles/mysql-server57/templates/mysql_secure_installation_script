@@ -5,7 +5,7 @@
 Int_Passwd=$(grep "A temporary password is generated for root@localhost:" /var/log/mysqld.log | awk '{ print $11}')
 
 # パスワード指定
-MysqlRootPasswd={{ db_passwd }}
+MysqlRootPasswd="{{ db_passwd }}"
 
 expect -c '
     set timeout 10;

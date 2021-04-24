@@ -1,16 +1,11 @@
 ---
 # tasks file for mysql-server80
-- name: repo_add
+- name: install mysql80 repository
   yum:
     name: https://dev.mysql.com/get/mysql80-community-release-el7-3.noarch.rpm
     state: present
 
-- name: check my.cnf
-  stat:
-    path: /etc/my.ansible_check
-  register: my_check
-
-- name: mysql-install
+- name: install mysql
   yum:
     name:
       - mysql-server
@@ -18,7 +13,7 @@
     state: present
   notify: mysqld_start
 
-- name: put_conf
+- name: put my.cnf
   template:
     src: ../templates/my.cnf.j2
     dest: /etc/my.cnf
@@ -27,15 +22,11 @@
     mode: 0644
     backup: yes
 
-- name: restart_mysql
+- name: restart mysql
   systemd:
     name: mysqld
     state: restarted
     enabled: yes
-
-#- name: exec_mysql_secure_installation
-#  script: ../files/mysql_secure_installation
-#  when: not my_check.stat.exists
 
 - name: confirm check_file
   stat: path=/usr/local/etc/mysql_stat.txt

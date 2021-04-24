@@ -1,11 +1,11 @@
 ---
 # tasks file for mysql-server57
-- name: repo_add
+- name: install mysql57 repository
   yum:
     name: http://dev.mysql.com/get/mysql57-community-release-el7-11.noarch.rpm
     state: present
 
-- name: mysql-install
+- name: install mysql
   yum:
     name:
       - mysql-server
@@ -13,7 +13,7 @@
     state: present
   register: result
 
-- name: put_conf
+- name: put my.cnf
   template:
     src: ../templates/my.cnf.j2
     dest: /etc/my.cnf
@@ -21,7 +21,7 @@
     group: root
     backup: yes
 
-- name: mysql_restart
+- name: restart mysql
   systemd:
     name: mysqld
     state: started
@@ -30,10 +30,6 @@
 - name: confirm check_file
   stat: path=/usr/local/etc/mysql_stat.txt
   register: result_mysql_exit
-
-#- name: exec_mysql_secure_installation
-#  script: ../files/mysql_secure_installation
-#  when: not result_mysql_exit.stat.exists
 
 - name: put mysql_secure_installation_script
   template:

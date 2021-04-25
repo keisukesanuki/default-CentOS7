@@ -1,20 +1,20 @@
 ---
 # yum update
 # 最新版ソフトウェアの適用
-- name: yum_groupinstall
+- name: yum groupinstall "Development tools"
   yum:
     name="@Development tools"
     state=present
 
 # yum update
-- name: yum_update
+- name: yum update
   yum:
     name=*
     state=latest
     security=yes
 
 # epelのインストール
-- name: epel-install
+- name: install epel-release
   yum:
     name=https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
 
@@ -25,19 +25,19 @@
     state=present
 
 # selinuxを無効化
-- name: disable-selinux
+- name: disable selinux
   selinux:
     state=disabled
 
 # firewalldを無効化
-- name: disable_firewalld
+- name: disable firewalld
   systemd:
     name: firewalld
     state: stopped
     enabled: no
 
 # 追加パッケージを導入
-- name: add_packages
+- name: add operation packages
   yum:
     name:
       - net-tools
@@ -53,11 +53,11 @@
     state: present
 
 # hostname変更
-- name: hostname_change
+- name: change hostname
   hostname: name="{{ inventory_hostname }}"
 
 # sysctl変更
-- name: sysctl_set
+- name: set kernel parameters to sysctl.conf
   sysctl:
     name: "{{ item.name }}"
     value: "{{ item.value }}"
@@ -83,7 +83,7 @@
     - { name: 'vm.swappiness',value: '10' }
 
 # limits_conf変更
-- name: ulimit_change
+- name: change ulimit to limits.conf
   pam_limits:
     domain: "{{ item.domain }}"
     limit_type: "{{ item.limit_type }}"
@@ -96,12 +96,12 @@
     - { domain: '*' ,limit_type: 'hard' }
 
 # timezone変更
-- name: timezone_change
+- name: change timezone Asia/Tokyo
   timezone:
     name: Asia/Tokyo
 
 # history時刻表示追加
-- name: histry_time_add
+- name: add histry_time
   lineinfile:
      dest=/root/.bashrc
      line="HISTTIMEFORMAT='%Y-%m-%dT%T%z '"

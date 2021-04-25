@@ -1,22 +1,25 @@
 ---
-# ルートユーザのパスワード
-root_pass: Qr9HhKVL:gf
-rh_version: 7
-
+## useradd
 # 作成するOSユーザ
 ex_user:
   - { customer: 'dev_ops' ,customer_pass: 'Kc=datum' ,full_publickey_path:  '../../../key/dev_ops.pub'}
   - { customer: 'read_ops' ,customer_pass: 'uX7HyhiR' }
 
-# apache administrator
+## httpd
+# ServerAdmin
 ServerAdmin: info@test.com
-# apache virtualhost
+
+# 設定するバーチャルホスト
 domain_name:
   - { domain: 'test1.com' ,customer: 'testuser1' }
   - { domain: 'test2.com' ,customer: 'testuser2' }
 
+# MaxClients
+maxclients: 256
+
+## php
 # PHP のバージョン/モジュール
-php_var: 72
+php_var: 73
 php_modules:
   - "php"
   - "php-pdo"
@@ -24,11 +27,14 @@ php_modules:
   - "php-gd"
   - "php-mysqlnd"
 
-# MySQLの設定
+## mysql-server
+# MySQLのパラメータ
 innodb_buffer_pool_size: 256M
 key_buffer_size: 128M
+
+# DBのパスワード
 db_passwd: aes7sChea7v:12
 
-# zabbix用
+## zabbix
 #root_password: W3mrzy4M:sgt
 #zabbix_password: gstshsW3mrzy4M:sgtsh

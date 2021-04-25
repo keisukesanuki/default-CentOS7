@@ -1,39 +1,39 @@
 ---
 # tasks file for useradd
-- name: ex_user_add
+- name: add ex_user
   user:
-    name="{{ item.customer }}"
-    groups=wheel
-    password="{{ item.customer_pass | password_hash('sha512') }}"
+    name: "{{ item.customer }}"
+    groups: wheel
+    password: "{{ item.customer_pass | password_hash('sha512') }}"
   with_items:
     - "{{ ex_user }}"
     
-- name: mkdir_ssh
+- name: mkdir .ssh directory
   file:
-    path="/home/{{ item.customer }}/.ssh"
-    state=directory
-    owner="{{ item.customer }}"
-    group="{{ item.customer }}"
-    mode=0700
+    path: "/home/{{ item.customer }}/.ssh"
+    state: directory
+    owner: "{{ item.customer }}"
+    group: "{{ item.customer }}"
+    mode: 0700
   with_items:
     - "{{ ex_user }}"
 
-- name: user_sshkey
+- name: create each authorized_keys
   copy:
-    src="../../../key/{{ item.customer }}.pub"
-    dest="/home/{{ item.customer }}/.ssh/authorized_keys"
-    owner="{{ item.customer }}"
-    group="{{ item.customer }}"
-    mode=0600
+    src: "{{ item.full_publickey_path | default('../../../key/default.pub', true) }}"
+    dest: "/home/{{ item.customer }}/.ssh/authorized_keys"
+    owner: "{{ item.customer }}"
+    group: "{{ item.customer }}"
+    mode: 0600
   with_items:
     - "{{ ex_user }}"
 
-- name: sudoers_add
+- name: add sudoers
   template:
-    src="../templates/customer.j2"
-    dest="/etc/sudoers.d/{{ item.customer }}"
-    owner=root
-    group=root
-    mode=0600
+    src: "../templates/customer.j2"
+    dest: "/etc/sudoers.d/{{ item.customer }}"
+    owner: root
+    group: root
+    mode: 0600
   with_items:
     - "{{ ex_user }}"

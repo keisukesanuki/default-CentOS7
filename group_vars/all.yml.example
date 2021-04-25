@@ -5,8 +5,8 @@ rh_version: 7
 
 # 作成するOSユーザ
 ex_user:
-  - { customer: 'testuser1' ,customer_pass: 'Kc=datum' }
-  - { customer: 'testuser2' ,customer_pass: 'uX7HyhiR' }
+  - { customer: 'dev_ops' ,customer_pass: 'Kc=datum' ,full_publickey_path:  '../../../key/dev_ops.pub'}
+  - { customer: 'read_ops' ,customer_pass: 'uX7HyhiR' }
 
 # apache administrator
 ServerAdmin: info@test.com

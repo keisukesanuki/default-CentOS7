@@ -19,7 +19,7 @@
 - name: download ssh-key
   fetch:
     src: "~{{ item.customer }}/.ssh/id_rsa"
-    dest: "/var/tmp/{{ ansible_nodename }}/{{ item.customer }}.pem"
+    dest: "{{ pkey_dir | default('/var/tmp', true) }}/{{ ansible_nodename }}/{{ item.customer }}.pem"
     flat: yes
   with_items:
     - "{{ ex_user }}"

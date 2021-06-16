@@ -4,7 +4,6 @@
   yum:
     name:
       - httpd
-      - mod_ssl
     state: present
 
 - name: modify default conf file
@@ -41,7 +40,7 @@
     group: root
     mode: 0644
   with_items:
-    - maxclient.conf
+    - mpm.conf
     - security.conf
 
 - include: security.yml

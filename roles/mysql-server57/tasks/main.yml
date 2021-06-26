@@ -21,7 +21,15 @@
     group: root
     backup: yes
 
-- name: restart mysql
+- name: mkdir /var/log/mysql/
+  file:
+    path: /var/log/mysql
+    state: directory
+    owner: mysql
+    group: mysql
+    mode: 0755
+
+- name: start mysql
   systemd:
     name: mysqld
     state: started
@@ -48,3 +56,12 @@
     path: /usr/local/etc/mysql_stat.txt
     state: touch
     mode: "u=rw,g=r,o=r"
+
+- name: change error-log location
+  lineinfile:
+    dest: /etc/my.cnf
+    state: present
+    backrefs: yes
+    regexp: '^log-error = /var/log/mysqld.log'
+    line: 'log-error = /var/log/mysql/mysqld.log'
+  notify: mysqld_restart

@@ -46,5 +46,5 @@ key_buffer_size = {{ key_buffer_size | default('8M', true) }}
 
 # slow-logの設定
 slow_query_log = 1
-slow_query_log_file = /var/run/mysqld/slow.log
+slow_query_log_file = /var/log/mysqld/slow.log
 long_query_time = 1
